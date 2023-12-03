@@ -26,11 +26,11 @@ jobs:
         zip -r ranked_all.zip ./*.json
         assets=()
         for asset in ./*.json; do
-          assets+=("-a" "$asset")
+          assets+=("$asset")
         done
-        assets+=("-a" "ranked_all.zip")
+        assets+=("ranked_all.zip")
         tag_name=`date '+%Y%m%d%H%M'`
-        gh release create "${assets[@]}" -m "Latest" "$tag_name"
+        gh release create "$tag_name" "${assets[@]}" -t "Latest" 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Cleanup
